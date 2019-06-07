@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div id="container">
+  <div id="wrapper">
+    <div id="content">
+
+      <form method="post" action="/upload" enctype="multipart/form-data">
+        <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="filesAddon">Upload</span>
+          </div>
+
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="files" name="files" aria-describedby="filesAddon" multiple>
+            <label class="custom-file-label" for="files">Choose file(s)</label>
+          </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <button id="upload-button" class="btn btn-lg btn-light">Upload</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+$(document).ready(function() {
+  $("form").on("submit", function() {
+    $("#upload-button").prop("disabled", true);
+  });
+
+  $("input[type='file']").on("change", function() {
+    let filenames = [];
+    let files = document.getElementById("files").files;
+
+    if (files.length > 1) {
+      filenames.push("Total " + files.length + " files selected");
+    }
+    else {
+      for (let i in files) {
+        if (files.hasOwnProperty(i)) {
+          filenames.push(files[i].name);
+        }
+      }
+    }
+
+    $(this)
+      .next(".custom-file-label")
+      .html(filenames.join(","));
+  });
+});
+</script>
+
+{% endblock %}

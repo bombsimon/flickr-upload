@@ -1,0 +1,18 @@
+---
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web
+    environment:
+      API_KEY: MY_KEY
+      API_SECRET: MY_SECRET
+      API_TOKEN: MY_TOKEN
+      API_TOKEN_SECRET: MY_TOKEN_SECRET
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
