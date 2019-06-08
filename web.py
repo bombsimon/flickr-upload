@@ -26,8 +26,11 @@ def upload():
     for file in uploaded_files:
         file.save("uploads/{}".format(file.filename))
 
-        fu.upload()
-        fu.clear()
+    # Upload all files.
+    fu.upload()
+
+    # Remove all files when uploaded.
+    fu.clear()
 
     flash("Uploaded {} images".format(len(uploaded_files)), "info")
 

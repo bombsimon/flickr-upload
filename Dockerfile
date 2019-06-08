@@ -9,4 +9,4 @@ COPY . /app
 RUN pip install -r requirements.txt \
     && rm -rf /root/.cache
 
-ENTRYPOINT [ "python", "/app/web.py" ]
+ENTRYPOINT [ "python" ]

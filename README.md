@@ -20,3 +20,18 @@ Flicr library does support caching but I chose not to use it.
 * `API_SECRET`
 * `API_TOKEN`
 * `API_TOKEN_SECRET`
+
+### Mail service
+
+Since this was actually designed to replace the email solution this repository
+also includes a service to read emails (only tested with Gmail), download
+attachments and upload those to Flickr. In addition to the above mentioned
+environment variables, generate an application password for your Google account
+and set
+
+* `EMAIL_USER` (full email address, including @gmail.com)
+* `EMAIL_PASSWORD` (the app password)
+* `EMAIL_IMAP` (if you don't want to use `imap.gmail.com`)
+
+Please don't tell people who would email inappropreate content about the address
+🙈.
