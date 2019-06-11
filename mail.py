@@ -8,6 +8,7 @@ Flickr.
 import email
 import imaplib
 import os
+import sys
 import time
 
 from flickr_upload.flickr_upload import FlickrUpload
@@ -84,7 +85,11 @@ class FetchEmail:
 
                 return emails
 
-            msg = email.message_from_bytes(data[0][1])
+            if sys.version_info[0] < 3:
+                msg = email.message_from_string(data[0][1])
+            else:
+                msg = email.message_from_bytes(data[0][1])
+
             if not isinstance(msg, str):
                 emails.append(msg)
 

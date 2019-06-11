@@ -29,7 +29,9 @@ class FlickrUpload:
             sys.exit(1)
 
         token = FlickrAccessToken(
-            self.API_TOKEN, self.API_TOKEN_SECRET, "write"
+            self.API_TOKEN.decode("utf-8"),
+            self.API_TOKEN_SECRET.decode("utf-8"),
+            u"write",
         )
 
         self._flickr = flickrapi.FlickrAPI(
@@ -61,12 +63,12 @@ class FlickrUpload:
         :param src_directory: The directory to upload images from.
         :param is_public: Set to 1 if the images should be public
         """
-        for file in os.listdir(src_directory):
+        for src_file in os.listdir(src_directory):
             # Skip hidden files (including .gitkeep)
-            if file.startswith("."):
+            if src_file.startswith("."):
                 continue
 
-            filename = os.path.join(src_directory, file)
+            filename = os.path.join(src_directory, src_file)
             image_type = imghdr.what(filename)
 
             # Skip unknown file types
@@ -90,8 +92,12 @@ class FlickrUpload:
         Remote all files from given source directory.
         :param src_directory: The directory to remove images from.
         """
-        for file in os.listdir(src_directory):
-            os.remove(os.path.join(src_directory, file))
+        for src_file in os.listdir(src_directory):
+            # Don't delete hidden files (including .gitkeep)
+            if src_file.startswith("."):
+                continue
+
+            os.remove(os.path.join(src_directory, src_file))
 
 
 def main():
